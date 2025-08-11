@@ -80,6 +80,10 @@ typings/
 .nuxt
 dist
 
+# Docusaurus
+.docusaurus
+build
+
 # Gatsby files
 .cache/
 public

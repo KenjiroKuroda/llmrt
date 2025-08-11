@@ -5,7 +5,7 @@ module.exports = {
   tagline: 'A tiny, dependency-free web runtime for JSON-based game cartridges',
   favicon: 'img/favicon.ico',
 
-  url: 'https://kenjirokuroda.github.io',
+  url: 'https://kenjirokuroda.github.io/',
   baseUrl: '/llmrt/',
   organizationName: 'KenjiroKuroda',
   projectName: 'llmrt',

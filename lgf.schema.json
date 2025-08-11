@@ -1,0 +1,468 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://llmrt.dev/schemas/lgf.schema.json",
+  "title": "LLM Game Format (LGF) Schema",
+  "description": "JSON schema for LLM Canvas Engine game cartridges",
+  "type": "object",
+  "required": ["version", "metadata", "theme", "scenes", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["1.0"],
+      "description": "LGF format version"
+    },
+    "metadata": {
+      "$ref": "#/definitions/CartridgeMetadata"
+    },
+    "theme": {
+      "$ref": "#/definitions/ThemeTokens"
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/Scene"
+      },
+      "description": "Game scenes"
+    },
+    "assets": {
+      "$ref": "#/definitions/AssetManifest"
+    },
+    "variables": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "number" },
+          { "type": "string" },
+          { "type": "boolean" }
+        ]
+      },
+      "description": "Global game variables"
+    }
+  },
+  "definitions": {
+    "CartridgeMetadata": {
+      "type": "object",
+      "required": ["title", "author", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "ThemeTokens": {
+      "type": "object",
+      "required": ["colors", "font", "spacing", "radii"],
+      "additionalProperties": false,
+      "properties": {
+        "colors": {
+          "type": "object",
+          "required": ["primary", "secondary", "background", "text", "accent"],
+          "additionalProperties": false,
+          "properties": {
+            "primary": { "$ref": "#/definitions/ColorValue" },
+            "secondary": { "$ref": "#/definitions/ColorValue" },
+            "background": { "$ref": "#/definitions/ColorValue" },
+            "text": { "$ref": "#/definitions/ColorValue" },
+            "accent": { "$ref": "#/definitions/ColorValue" }
+          }
+        },
+        "font": {
+          "type": "object",
+          "required": ["family", "sizes"],
+          "additionalProperties": false,
+          "properties": {
+            "family": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sizes": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 8,
+                "maximum": 72
+              }
+            }
+          }
+        },
+        "spacing": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "radii": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "ColorValue": {
+      "type": "string",
+      "pattern": "^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$"
+    },
+    "Scene": {
+      "type": "object",
+      "required": ["id", "root"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "root": {
+          "$ref": "#/definitions/Node"
+        }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "required": ["id", "type", "transform", "visible", "children", "actions", "triggers"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "type": {
+          "$ref": "#/definitions/NodeType"
+        },
+        "transform": {
+          "$ref": "#/definitions/Transform2D"
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "triggers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          }
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostEffect"
+          },
+          "description": "Post-processing effects (PostChain nodes only)"
+        },
+        "renderTarget": {
+          "type": "string",
+          "description": "Optional render target ID (PostChain nodes only)"
+        }
+      }
+    },
+    "NodeType": {
+      "type": "string",
+      "enum": [
+        "Group", "Sprite", "Text", "Button", "Camera2D", 
+        "Particles2D", "PostChain", "Mode7Plane", "RaycastMap", "TilemapIso"
+      ]
+    },
+    "Transform2D": {
+      "type": "object",
+      "required": ["position", "scale", "rotation", "skew", "alpha"],
+      "additionalProperties": false,
+      "properties": {
+        "position": { "$ref": "#/definitions/Vector2" },
+        "scale": { "$ref": "#/definitions/Vector2" },
+        "rotation": {
+          "type": "number"
+        },
+        "skew": { "$ref": "#/definitions/Vector2" },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "Vector2": {
+      "type": "object",
+      "required": ["x", "y"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      }
+    },
+    "Action": {
+      "type": "object",
+      "required": ["type", "params"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ActionType"
+        },
+        "params": {
+          "type": "object"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          }
+        }
+      }
+    },
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "gotoScene", "spawn", "despawn", "setVar", "incVar", "randomInt",
+        "if", "tween", "playSprite", "setCamera", "shake", "playSfx",
+        "playMusic", "startTimer", "stopTimer", "emit", "moveCamera"
+      ]
+    },
+    "Condition": {
+      "type": "object",
+      "required": ["type", "variable"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["equals", "greater", "less", "exists"]
+        },
+        "variable": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {}
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "required": ["event", "actions"],
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "$ref": "#/definitions/TriggerEvent"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        }
+      }
+    },
+    "TriggerEvent": {
+      "type": "string",
+      "enum": [
+        "on.start", "on.tick", "on.key", "on.pointer", 
+        "on.timer", "on.raycastHit"
+      ]
+    },
+    "AssetManifest": {
+      "type": "object",
+      "required": ["sprites", "audio", "fonts"],
+      "additionalProperties": false,
+      "properties": {
+        "sprites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpriteAsset"
+          }
+        },
+        "audio": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AudioAsset"
+          }
+        },
+        "fonts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FontAsset"
+          }
+        }
+      }
+    },
+    "SpriteAsset": {
+      "type": "object",
+      "required": ["id", "url", "width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "url": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2048
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2048
+        },
+        "frames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "AudioAsset": {
+      "type": "object",
+      "required": ["id", "url", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "url": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["sfx", "music"]
+        }
+      }
+    },
+    "FontAsset": {
+      "type": "object",
+      "required": ["id", "family", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "PostEffect": {
+      "type": "object",
+      "required": ["type", "enabled", "intensity"],
+      "additionalProperties": true,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["vignette", "bloom-lite", "color-grading"]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Vignette inner radius or bloom blur radius"
+        },
+        "softness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Vignette edge softness"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Vignette color (hex format)"
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Bloom brightness threshold"
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Bloom strength multiplier"
+        },
+        "brightness": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "Color grading brightness adjustment"
+        },
+        "contrast": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "Color grading contrast adjustment"
+        },
+        "saturation": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "Color grading saturation adjustment"
+        },
+        "hue": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180,
+          "description": "Color grading hue shift in degrees"
+        },
+        "gamma": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 3.0,
+          "description": "Color grading gamma correction"
+        }
+      }
+    }
+  }
+}

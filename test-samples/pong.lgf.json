@@ -1,0 +1,478 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Pong Game",
+    "author": "LLM Canvas Engine",
+    "description": "Classic Pong game demonstrating basic 2D gameplay mechanics with paddles, ball physics, scoring, and collision detection"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#CCCCCC", 
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "accent": "#00FF00"
+    },
+    "font": {
+      "family": "monospace",
+      "sizes": {
+        "small": 12,
+        "medium": 16,
+        "large": 24,
+        "huge": 32
+      }
+    },
+    "spacing": {
+      "small": 4,
+      "medium": 8,
+      "large": 16,
+      "huge": 32
+    },
+    "radii": {
+      "small": 2,
+      "medium": 4,
+      "large": 8
+    }
+  },
+  "scenes": [
+    {
+      "id": "gameScene",
+      "root": {
+        "id": "root",
+        "type": "Group",
+        "transform": {
+          "position": { "x": 0, "y": 0 },
+          "scale": { "x": 1, "y": 1 },
+          "rotation": 0,
+          "skew": { "x": 0, "y": 0 },
+          "alpha": 1
+        },
+        "visible": true,
+        "children": [
+          {
+            "id": "camera",
+            "type": "Camera2D",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": []
+          },
+          {
+            "id": "paddle1",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 50, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.key",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'w' && paddle1.position.y > 60"
+                    },
+                    "actions": [
+                      {
+                        "type": "tween",
+                        "params": {
+                          "target": "paddle1",
+                          "property": "position.y",
+                          "to": "paddle1.position.y - 20",
+                          "duration": 0.1
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if", 
+                    "params": {
+                      "condition": "key === 's' && paddle1.position.y < 540"
+                    },
+                    "actions": [
+                      {
+                        "type": "tween",
+                        "params": {
+                          "target": "paddle1",
+                          "property": "position.y", 
+                          "to": "paddle1.position.y + 20",
+                          "duration": 0.1
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "sprite": "paddle"
+          },
+          {
+            "id": "paddle2",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 750, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.key",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'ArrowUp' && paddle2.position.y > 60"
+                    },
+                    "actions": [
+                      {
+                        "type": "tween",
+                        "params": {
+                          "target": "paddle2",
+                          "property": "position.y",
+                          "to": "paddle2.position.y - 20",
+                          "duration": 0.1
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'ArrowDown' && paddle2.position.y < 540"
+                    },
+                    "actions": [
+                      {
+                        "type": "tween",
+                        "params": {
+                          "target": "paddle2",
+                          "property": "position.y",
+                          "to": "paddle2.position.y + 20", 
+                          "duration": 0.1
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "sprite": "paddle"
+          },
+          {
+            "id": "ball",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.start",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "ballVelocityX",
+                      "value": 200
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "ballVelocityY", 
+                      "value": 100
+                    }
+                  }
+                ]
+              },
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "newX",
+                      "value": "ball.position.x + ballVelocityX * deltaTime"
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "newY",
+                      "value": "ball.position.y + ballVelocityY * deltaTime"
+                    }
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "newY <= 20 || newY >= 580"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "ballVelocityY",
+                          "value": "-ballVelocityY"
+                        }
+                      },
+                      {
+                        "type": "playSfx",
+                        "params": {
+                          "id": "bounce",
+                          "volume": 0.5
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "newX <= 0"
+                    },
+                    "actions": [
+                      {
+                        "type": "incVar",
+                        "params": {
+                          "name": "score2",
+                          "value": 1
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newX",
+                          "value": 400
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newY", 
+                          "value": 300
+                        }
+                      },
+                      {
+                        "type": "playSfx",
+                        "params": {
+                          "id": "score",
+                          "volume": 0.7
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "newX >= 800"
+                    },
+                    "actions": [
+                      {
+                        "type": "incVar",
+                        "params": {
+                          "name": "score1",
+                          "value": 1
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newX",
+                          "value": 400
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newY",
+                          "value": 300
+                        }
+                      },
+                      {
+                        "type": "playSfx",
+                        "params": {
+                          "id": "score",
+                          "volume": 0.7
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tween",
+                    "params": {
+                      "target": "ball",
+                      "property": "position.x",
+                      "to": "newX",
+                      "duration": 0.016
+                    }
+                  },
+                  {
+                    "type": "tween",
+                    "params": {
+                      "target": "ball",
+                      "property": "position.y",
+                      "to": "newY", 
+                      "duration": 0.016
+                    }
+                  }
+                ]
+              }
+            ],
+            "sprite": "ball"
+          },
+          {
+            "id": "centerLine",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.5
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [],
+            "sprite": "centerLine"
+          },
+          {
+            "id": "score1Text",
+            "type": "Text",
+            "transform": {
+              "position": { "x": 300, "y": 50 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "score1Display",
+                      "value": "score1.toString()"
+                    }
+                  }
+                ]
+              }
+            ],
+            "text": "0",
+            "fontSize": "huge",
+            "color": "primary"
+          },
+          {
+            "id": "score2Text", 
+            "type": "Text",
+            "transform": {
+              "position": { "x": 500, "y": 50 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "score2Display",
+                      "value": "score2.toString()"
+                    }
+                  }
+                ]
+              }
+            ],
+            "text": "0",
+            "fontSize": "huge", 
+            "color": "primary"
+          }
+        ],
+        "actions": [],
+        "triggers": []
+      }
+    }
+  ],
+  "assets": {
+    "sprites": [
+      {
+        "id": "paddle",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAABkCAYAAACjwgS5AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 20,
+        "height": 100,
+        "frames": 1
+      },
+      {
+        "id": "ball",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 20,
+        "height": 20,
+        "frames": 1
+      },
+      {
+        "id": "centerLine",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAJYCAYAAABKvKo1AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 4,
+        "height": 600,
+        "frames": 1
+      }
+    ],
+    "audio": [
+      {
+        "id": "bounce",
+        "url": "bounce.wav",
+        "type": "sfx"
+      },
+      {
+        "id": "score",
+        "url": "score.wav", 
+        "type": "sfx"
+      }
+    ],
+    "fonts": []
+  },
+  "variables": {
+    "score1": 0,
+    "score2": 0,
+    "ballVelocityX": 200,
+    "ballVelocityY": 100,
+    "newX": 400,
+    "newY": 300,
+    "score1Display": "0",
+    "score2Display": "0"
+  }
+}

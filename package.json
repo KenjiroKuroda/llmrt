@@ -1,0 +1,71 @@
+{
+  "name": "llm-canvas-engine",
+  "version": "1.0.0",
+  "description": "A tiny, dependency-free web runtime for JSON-based game cartridges",
+  "type": "module",
+  "main": "dist/llmrt.min.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "build:dev": "rollup -c --environment NODE_ENV:development",
+    "build:mobile": "rollup -c --environment BUILD_TARGET:mobile-minimal",
+    "build:desktop": "rollup -c --environment BUILD_TARGET:desktop-full",
+    "build:web": "rollup -c --environment BUILD_TARGET:web-standard",
+    "build:all": "npm run build:mobile && npm run build:desktop && npm run build:web",
+    "build:playground": "rollup -c && cp playground.html dist/",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:performance": "vitest --run src/core/performance-tests.ts",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "validate": "node dist/cli/validator.js",
+    "validate:accessibility": "node dist/cli/accessibility-validator.js",
+    "playground": "npm run build:playground && python3 -m http.server 8080",
+    "analyze-bundle": "npm run build && ls -la dist/ && gzip -c dist/llmrt.min.js | wc -c",
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build:docs": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
+  },
+  "bin": {
+    "lgf-validate": "./bin/lgf-validate",
+    "lgf-accessibility": "./bin/lgf-accessibility"
+  },
+  "keywords": ["game-engine", "canvas", "llm", "json", "retro"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "rollup": "^4.6.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0",
+    "jsdom": "^23.0.0",
+    "tslib": "^2.6.0",
+    "@docusaurus/core": "^3.0.0",
+    "@docusaurus/preset-classic": "^3.0.0",
+    "@docusaurus/module-type-aliases": "^3.0.0",
+    "@docusaurus/theme-classic": "^3.0.0",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "files": [
+    "dist/",
+    "src/types/",
+    "bin/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

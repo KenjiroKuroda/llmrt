@@ -1,0 +1,145 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Pong Game",
+    "author": "LLM Canvas Engine",
+    "description": "Classic Pong game demonstrating basic 2D gameplay mechanics"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#CCCCCC",
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "accent": "#00FF00"
+    },
+    "font": {
+      "family": "monospace",
+      "sizes": {
+        "small": 12,
+        "medium": 16,
+        "large": 24
+      }
+    },
+    "spacing": {
+      "small": 4,
+      "medium": 8,
+      "large": 16
+    },
+    "radii": {
+      "small": 2,
+      "medium": 4,
+      "large": 8
+    }
+  },
+  "scenes": [
+    {
+      "id": "gameScene",
+      "root": {
+        "id": "root",
+        "type": "Group",
+        "transform": {
+          "position": { "x": 0, "y": 0 },
+          "scale": { "x": 1, "y": 1 },
+          "rotation": 0,
+          "skew": { "x": 0, "y": 0 },
+          "alpha": 1
+        },
+        "visible": true,
+        "children": [
+          {
+            "id": "paddle1",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 50, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.key",
+                "actions": [
+                  {
+                    "type": "tween",
+                    "params": {
+                      "property": "position.y",
+                      "to": 250,
+                      "duration": 0.1
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "ball",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.start",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "ballVelocityX",
+                      "value": 200
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "actions": [],
+        "triggers": []
+      }
+    }
+  ],
+  "assets": {
+    "sprites": [
+      {
+        "id": "paddle",
+        "url": "paddle.png",
+        "width": 20,
+        "height": 100,
+        "frames": 1
+      },
+      {
+        "id": "ball",
+        "url": "ball.png",
+        "width": 20,
+        "height": 20,
+        "frames": 1
+      }
+    ],
+    "audio": [
+      {
+        "id": "bounce",
+        "url": "bounce.wav",
+        "type": "sfx"
+      }
+    ],
+    "fonts": []
+  },
+  "variables": {
+    "score1": 0,
+    "score2": 0,
+    "ballVelocityX": 200,
+    "ballVelocityY": 0
+  }
+}

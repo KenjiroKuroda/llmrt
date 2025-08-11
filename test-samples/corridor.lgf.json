@@ -1,0 +1,438 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Raycast Corridor",
+    "author": "LLM Canvas Engine",
+    "description": "First-person corridor exploration demonstrating raycast rendering with textured walls, billboards, and collision detection"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#CCCCCC",
+      "background": "#000000", 
+      "text": "#FFFFFF",
+      "accent": "#FF6600"
+    },
+    "font": {
+      "family": "monospace",
+      "sizes": {
+        "small": 12,
+        "medium": 16,
+        "large": 24
+      }
+    },
+    "spacing": {
+      "small": 4,
+      "medium": 8,
+      "large": 16
+    },
+    "radii": {
+      "small": 2,
+      "medium": 4,
+      "large": 8
+    }
+  },
+  "scenes": [
+    {
+      "id": "corridorScene",
+      "root": {
+        "id": "root",
+        "type": "Group",
+        "transform": {
+          "position": { "x": 0, "y": 0 },
+          "scale": { "x": 1, "y": 1 },
+          "rotation": 0,
+          "skew": { "x": 0, "y": 0 },
+          "alpha": 1
+        },
+        "visible": true,
+        "children": [
+          {
+            "id": "camera",
+            "type": "Camera2D",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": []
+          },
+          {
+            "id": "raycastMap",
+            "type": "RaycastMap",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.start",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "playerX",
+                      "value": 2.5
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "playerY",
+                      "value": 2.5
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "playerAngle",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "moveSpeed",
+                      "value": 3.0
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "turnSpeed",
+                      "value": 2.0
+                    }
+                  }
+                ]
+              },
+              {
+                "event": "on.key",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'w' || key === 'ArrowUp'"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newX",
+                          "value": "playerX + Math.cos(playerAngle) * moveSpeed * deltaTime"
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newY",
+                          "value": "playerY + Math.sin(playerAngle) * moveSpeed * deltaTime"
+                        }
+                      },
+                      {
+                        "type": "if",
+                        "params": {
+                          "condition": "map[Math.floor(newY)][Math.floor(newX)] === 0"
+                        },
+                        "actions": [
+                          {
+                            "type": "setVar",
+                            "params": {
+                              "name": "playerX",
+                              "value": "newX"
+                            }
+                          },
+                          {
+                            "type": "setVar",
+                            "params": {
+                              "name": "playerY",
+                              "value": "newY"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 's' || key === 'ArrowDown'"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newX",
+                          "value": "playerX - Math.cos(playerAngle) * moveSpeed * deltaTime"
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "newY",
+                          "value": "playerY - Math.sin(playerAngle) * moveSpeed * deltaTime"
+                        }
+                      },
+                      {
+                        "type": "if",
+                        "params": {
+                          "condition": "map[Math.floor(newY)][Math.floor(newX)] === 0"
+                        },
+                        "actions": [
+                          {
+                            "type": "setVar",
+                            "params": {
+                              "name": "playerX",
+                              "value": "newX"
+                            }
+                          },
+                          {
+                            "type": "setVar",
+                            "params": {
+                              "name": "playerY",
+                              "value": "newY"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'a' || key === 'ArrowLeft'"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "playerAngle",
+                          "value": "playerAngle - turnSpeed * deltaTime"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'd' || key === 'ArrowRight'"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "playerAngle",
+                          "value": "playerAngle + turnSpeed * deltaTime"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "event": "on.raycastHit",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "hitType === 'billboard' && billboardId === 'torch'"
+                    },
+                    "actions": [
+                      {
+                        "type": "playSfx",
+                        "params": {
+                          "id": "torch",
+                          "volume": 0.3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "map": [
+              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+              [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+              [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+              [1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
+              [1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+              [1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+              [1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
+              [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+              [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ],
+            "textures": ["wallTexture", "doorTexture"],
+            "billboards": [
+              {
+                "id": "torch1",
+                "sprite": "torch",
+                "position": { "x": 3.5, "y": 3.5 },
+                "scale": 1.0
+              },
+              {
+                "id": "torch2", 
+                "sprite": "torch",
+                "position": { "x": 6.5, "y": 3.5 },
+                "scale": 1.0
+              },
+              {
+                "id": "torch3",
+                "sprite": "torch",
+                "position": { "x": 3.5, "y": 6.5 },
+                "scale": 1.0
+              },
+              {
+                "id": "torch4",
+                "sprite": "torch",
+                "position": { "x": 6.5, "y": 6.5 },
+                "scale": 1.0
+              }
+            ],
+            "fov": 60,
+            "renderDistance": 10.0,
+            "playerPosition": { "x": 2.5, "y": 2.5 },
+            "playerAngle": 0
+          },
+          {
+            "id": "crosshair",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.7
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [],
+            "sprite": "crosshair"
+          },
+          {
+            "id": "instructionsText",
+            "type": "Text",
+            "transform": {
+              "position": { "x": 20, "y": 20 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.8
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [],
+            "text": "WASD or Arrow Keys to move",
+            "fontSize": "small",
+            "color": "text"
+          },
+          {
+            "id": "positionText",
+            "type": "Text",
+            "transform": {
+              "position": { "x": 20, "y": 560 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.8
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "positionDisplay",
+                      "value": "'Position: ' + playerX.toFixed(1) + ', ' + playerY.toFixed(1)"
+                    }
+                  }
+                ]
+              }
+            ],
+            "text": "Position: 2.5, 2.5",
+            "fontSize": "small",
+            "color": "accent"
+          }
+        ],
+        "actions": [],
+        "triggers": []
+      }
+    }
+  ],
+  "assets": {
+    "sprites": [
+      {
+        "id": "wallTexture",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 64,
+        "height": 64,
+        "frames": 1
+      },
+      {
+        "id": "doorTexture",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 64,
+        "height": 64,
+        "frames": 1
+      },
+      {
+        "id": "torch",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 32,
+        "height": 32,
+        "frames": 4
+      },
+      {
+        "id": "crosshair",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 20,
+        "height": 20,
+        "frames": 1
+      }
+    ],
+    "audio": [
+      {
+        "id": "footstep",
+        "url": "footstep.wav",
+        "type": "sfx"
+      },
+      {
+        "id": "torch",
+        "url": "torch.wav",
+        "type": "sfx"
+      },
+      {
+        "id": "ambient",
+        "url": "ambient.wav",
+        "type": "music"
+      }
+    ],
+    "fonts": []
+  },
+  "variables": {
+    "playerX": 2.5,
+    "playerY": 2.5,
+    "playerAngle": 0,
+    "moveSpeed": 3.0,
+    "turnSpeed": 2.0,
+    "newX": 2.5,
+    "newY": 2.5,
+    "positionDisplay": "Position: 2.5, 2.5"
+  }
+}

@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+/**
+ * Binary wrapper for the LGF accessibility validator
+ */
+
+import { AccessibilityValidatorCLI } from '../dist/cli/accessibility-validator.js';
+
+const cli = new AccessibilityValidatorCLI();
+cli.run(process.argv.slice(2));

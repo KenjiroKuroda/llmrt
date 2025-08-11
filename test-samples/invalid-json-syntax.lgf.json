@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Broken JSON",
+    "author": "Test",
+    "description": "This file has invalid JSON syntax"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#FF0000",
+      "secondary": "#00FF00",
+      "background": "#0000FF",
+      "text": "#FFFFFF",
+      "accent": "#FFFF00"
+    },
+    "font": {
+      "family": "Arial",
+      "sizes": {
+        "small": 12,
+        "medium": 16,
+        "large": 24
+      }
+    },
+    "spacing": {
+      "small": 4,
+      "medium": 8,
+      "large": 16
+    },
+    "radii": {
+      "small": 2,
+      "medium": 4,
+      "large": 8
+    }
+  },
+  "scenes": [
+    {
+      "id": "testScene",
+      "root": {
+        "id": "root",
+        "type": "Group",
+        "transform": {
+          "position": { "x": 0, "y": 0 },
+          "scale": { "x": 1, "y": 1 },
+          "rotation": 0,
+          "skew": { "x": 0, "y": 0 },
+          "alpha": 1
+        },
+        "visible": true,
+        "children": [],
+        "actions": [],
+        "triggers": []
+      }
+    }
+  ],
+  "assets": {
+    "sprites": [],
+    "audio": [],
+    "fonts": []
+  },
+  "variables": {
+    "test": true
+  }
+  // This comment makes the JSON invalid
+}

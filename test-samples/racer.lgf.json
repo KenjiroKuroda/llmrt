@@ -1,0 +1,521 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Mode-7 Racer",
+    "author": "LLM Canvas Engine",
+    "description": "Retro racing game demonstrating Mode-7 perspective rendering with textured ground plane, horizon effects, and smooth camera movement"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#CCCCCC",
+      "background": "#87CEEB",
+      "text": "#FFFFFF", 
+      "accent": "#FF0000"
+    },
+    "font": {
+      "family": "monospace",
+      "sizes": {
+        "small": 12,
+        "medium": 16,
+        "large": 24,
+        "huge": 32
+      }
+    },
+    "spacing": {
+      "small": 4,
+      "medium": 8,
+      "large": 16
+    },
+    "radii": {
+      "small": 2,
+      "medium": 4,
+      "large": 8
+    }
+  },
+  "scenes": [
+    {
+      "id": "raceScene",
+      "root": {
+        "id": "root",
+        "type": "Group",
+        "transform": {
+          "position": { "x": 0, "y": 0 },
+          "scale": { "x": 1, "y": 1 },
+          "rotation": 0,
+          "skew": { "x": 0, "y": 0 },
+          "alpha": 1
+        },
+        "visible": true,
+        "children": [
+          {
+            "id": "camera",
+            "type": "Camera2D",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": []
+          },
+          {
+            "id": "mode7Plane",
+            "type": "Mode7Plane",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.start",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "carX",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "carY",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "carAngle",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "carSpeed",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "maxSpeed",
+                      "value": 200
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "acceleration",
+                      "value": 100
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "deceleration",
+                      "value": 150
+                    }
+                  },
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "turnSpeed",
+                      "value": 2.0
+                    }
+                  }
+                ]
+              },
+              {
+                "event": "on.key",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 'w' || key === 'ArrowUp'"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carSpeed",
+                          "value": "Math.min(carSpeed + acceleration * deltaTime, maxSpeed)"
+                        }
+                      },
+                      {
+                        "type": "if",
+                        "params": {
+                          "condition": "carSpeed > 20"
+                        },
+                        "actions": [
+                          {
+                            "type": "playSfx",
+                            "params": {
+                              "id": "engine",
+                              "volume": 0.3
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "key === 's' || key === 'ArrowDown'"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carSpeed",
+                          "value": "Math.max(carSpeed - deceleration * deltaTime, -maxSpeed * 0.5)"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "(key === 'a' || key === 'ArrowLeft') && Math.abs(carSpeed) > 10"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carAngle",
+                          "value": "carAngle - turnSpeed * deltaTime * (carSpeed / maxSpeed)"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "(key === 'd' || key === 'ArrowRight') && Math.abs(carSpeed) > 10"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carAngle",
+                          "value": "carAngle + turnSpeed * deltaTime * (carSpeed / maxSpeed)"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "Math.abs(carSpeed) > 5"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carX",
+                          "value": "carX + Math.cos(carAngle) * carSpeed * deltaTime"
+                        }
+                      },
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carY",
+                          "value": "carY + Math.sin(carAngle) * carSpeed * deltaTime"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "Math.abs(carSpeed) > 0"
+                    },
+                    "actions": [
+                      {
+                        "type": "setVar",
+                        "params": {
+                          "name": "carSpeed",
+                          "value": "carSpeed * 0.98"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "moveCamera",
+                    "params": {
+                      "target": "camera",
+                      "position": {
+                        "x": "400 + carX * 0.1",
+                        "y": "300 + carY * 0.1"
+                      },
+                      "duration": 0.1
+                    }
+                  }
+                ]
+              }
+            ],
+            "texture": "roadTexture",
+            "horizon": 0.4,
+            "scale": 1.0,
+            "offset": { "x": 0, "y": 0 },
+            "cameraPosition": { "x": 0, "y": 0 },
+            "cameraAngle": 0
+          },
+          {
+            "id": "car",
+            "type": "Sprite",
+            "transform": {
+              "position": { "x": 400, "y": 450 },
+              "scale": { "x": 2, "y": 2 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "tween",
+                    "params": {
+                      "target": "car",
+                      "property": "transform.rotation",
+                      "to": "carAngle * 0.1",
+                      "duration": 0.1
+                    }
+                  },
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "Math.abs(carSpeed) > 50"
+                    },
+                    "actions": [
+                      {
+                        "type": "shake",
+                        "params": {
+                          "target": "car",
+                          "intensity": "carSpeed / maxSpeed * 2",
+                          "duration": 0.1
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "sprite": "carSprite"
+          },
+          {
+            "id": "speedometer",
+            "type": "Text",
+            "transform": {
+              "position": { "x": 700, "y": 550 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.9
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "speedDisplay",
+                      "value": "'Speed: ' + Math.abs(carSpeed).toFixed(0) + ' km/h'"
+                    }
+                  }
+                ]
+              }
+            ],
+            "text": "Speed: 0 km/h",
+            "fontSize": "medium",
+            "color": "text"
+          },
+          {
+            "id": "instructionsText",
+            "type": "Text",
+            "transform": {
+              "position": { "x": 20, "y": 20 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.8
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [],
+            "text": "WASD or Arrow Keys to drive",
+            "fontSize": "small",
+            "color": "text"
+          },
+          {
+            "id": "positionText",
+            "type": "Text",
+            "transform": {
+              "position": { "x": 20, "y": 550 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 0.8
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "setVar",
+                    "params": {
+                      "name": "positionDisplay",
+                      "value": "'Position: ' + carX.toFixed(1) + ', ' + carY.toFixed(1)"
+                    }
+                  }
+                ]
+              }
+            ],
+            "text": "Position: 0.0, 0.0",
+            "fontSize": "small",
+            "color": "accent"
+          },
+          {
+            "id": "postChain",
+            "type": "PostChain",
+            "transform": {
+              "position": { "x": 400, "y": 300 },
+              "scale": { "x": 1, "y": 1 },
+              "rotation": 0,
+              "skew": { "x": 0, "y": 0 },
+              "alpha": 1
+            },
+            "visible": true,
+            "children": [],
+            "actions": [],
+            "triggers": [
+              {
+                "event": "on.tick",
+                "actions": [
+                  {
+                    "type": "if",
+                    "params": {
+                      "condition": "Math.abs(carSpeed) > 100"
+                    },
+                    "actions": [
+                      {
+                        "type": "tween",
+                        "params": {
+                          "target": "postChain.effects[0]",
+                          "property": "intensity",
+                          "to": "Math.min(carSpeed / maxSpeed * 0.3, 0.3)",
+                          "duration": 0.1
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "effects": [
+              {
+                "type": "vignette",
+                "enabled": true,
+                "intensity": 0.1,
+                "radius": 0.6,
+                "softness": 0.4,
+                "color": "#000000"
+              },
+              {
+                "type": "color-grading",
+                "enabled": true,
+                "intensity": 0.2,
+                "brightness": 0.1,
+                "contrast": 0.1,
+                "saturation": 0.2,
+                "hue": 0,
+                "gamma": 1.0
+              }
+            ]
+          }
+        ],
+        "actions": [],
+        "triggers": []
+      }
+    }
+  ],
+  "assets": {
+    "sprites": [
+      {
+        "id": "roadTexture",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 128,
+        "height": 128,
+        "frames": 1
+      },
+      {
+        "id": "carSprite",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "width": 32,
+        "height": 32,
+        "frames": 1
+      }
+    ],
+    "audio": [
+      {
+        "id": "engine",
+        "url": "engine.wav",
+        "type": "sfx"
+      },
+      {
+        "id": "tire",
+        "url": "tire.wav",
+        "type": "sfx"
+      },
+      {
+        "id": "raceMusic",
+        "url": "race-music.wav",
+        "type": "music"
+      }
+    ],
+    "fonts": []
+  },
+  "variables": {
+    "carX": 0,
+    "carY": 0,
+    "carAngle": 0,
+    "carSpeed": 0,
+    "maxSpeed": 200,
+    "acceleration": 100,
+    "deceleration": 150,
+    "turnSpeed": 2.0,
+    "speedDisplay": "Speed: 0 km/h",
+    "positionDisplay": "Position: 0.0, 0.0"
+  }
+}

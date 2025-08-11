@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+/**
+ * LGF Validator CLI Entry Point
+ */
+
+import('../dist/cli/validator.js');

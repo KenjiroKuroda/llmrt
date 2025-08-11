@@ -5,9 +5,9 @@ module.exports = {
   tagline: 'A tiny, dependency-free web runtime for JSON-based game cartridges',
   favicon: 'img/favicon.ico',
 
-  url: 'https://username.github.io',
+  url: 'https://kenjirokuroda.github.io',
   baseUrl: '/llmrt/',
-  organizationName: 'your-github-username',
+  organizationName: 'KenjiroKuroda',
   projectName: 'llmrt',
 
   onBrokenLinks: 'throw',
@@ -24,7 +24,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/your-github-username/llmrt/tree/main/',
+          editUrl: 'https://github.com/kenjirokuroda/llmrt/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -49,7 +49,7 @@ module.exports = {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/your-github-username/llmrt',
+          href: 'https://github.com/kenjirokuroda/llmrt',
           label: 'GitHub',
           position: 'right',
         },
@@ -76,7 +76,7 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/your-github-username/llmrt',
+              href: 'https://github.com/kenjirokuroda/llmrt',
             },
           ],
         },

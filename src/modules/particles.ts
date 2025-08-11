@@ -3,7 +3,7 @@
  * Implements particle lifecycle management, physics, and rendering
  */
 
-import { Node, Vector2 } from '../types/core.js';
+import { Node } from '../types/core.js';
 import { RenderModule, RenderContext, ModuleDefinition, Particles2DNode, ParticleEmitter, Particle } from '../types/modules.js';
 import { ModuleRegistry } from '../core/module-registry.js';
 

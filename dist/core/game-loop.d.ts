@@ -38,7 +38,6 @@ export declare class GameLoop {
     private _lastFpsUpdate;
     private _currentFps;
     private _droppedFrames;
-    private _startTime;
     private _rng;
     private _rafHandle;
     constructor(callbacks?: GameLoopCallbacks);

@@ -35,7 +35,6 @@ export interface BuildResult {
 }
 export declare class BuildExporter {
     private engineCode;
-    private moduleCode;
     constructor();
     private loadEngineCode;
     exportBuild(config: BuildConfig): Promise<BuildResult>;

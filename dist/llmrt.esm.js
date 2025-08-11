@@ -173,7 +173,7 @@ class InputManagerImpl {
     getPointerPosition() {
         return { ...this.pointerState.position };
     }
-    getPointerWorldPosition(camera) {
+    getPointerWorldPosition(_camera) {
         // For now, return screen position. Camera transformation would be added later
         return { ...this.pointerState.position };
     }
@@ -2841,7 +2841,6 @@ class GameLoop {
         this._lastFpsUpdate = 0;
         this._currentFps = 0;
         this._droppedFrames = 0;
-        this._startTime = 0;
         // RNG system
         this._rng = new DeterministicRNG();
         // Animation frame handle
@@ -3218,7 +3217,7 @@ class ActionSystem {
         };
         this.timers.set(timerId, timer);
     }
-    executeStopTimer(action, context) {
+    executeStopTimer(action, _context) {
         const timerId = action.params.id;
         if (typeof timerId === 'string') {
             this.timers.delete(timerId);
@@ -3239,11 +3238,11 @@ class ActionSystem {
             context.audioManager.playMusic(id, loop, volume);
         }
     }
-    executeStopMusic(action, context) {
+    executeStopMusic(_action, context) {
         context.audioManager.stopMusic();
     }
     // Helper methods
-    createNodeFromData(nodeData) {
+    createNodeFromData(_nodeData) {
         // This would create a proper Node instance from JSON data
         // For now, return null as this requires the full Node implementation
         return null;
@@ -3490,7 +3489,7 @@ class TriggerSystem {
     /**
      * Extract the key from a key trigger (if specified)
      */
-    getTriggerKey(trigger) {
+    getTriggerKey() {
         // Look for key specification in trigger actions or params
         // This is a simplified implementation
         return null;
@@ -3560,7 +3559,6 @@ class Renderer {
             batchedSprites: 0
         };
         this.spriteBatch = [];
-        this.maxBatchSize = 100;
         this.enableFrustumCulling = true;
         this.enableSpriteBatching = true;
         this.canvas = canvas;
@@ -3707,7 +3705,7 @@ class Renderer {
         const screenY = (worldPos.y - this.camera.position.y) * this.camera.zoom + this.viewport.offset.y;
         return { x: screenX, y: screenY };
     }
-    setupCameraTransform(interpolation) {
+    setupCameraTransform() {
         this.ctx.save();
         // Apply viewport scaling and centering
         this.ctx.translate(this.viewport.offset.x, this.viewport.offset.y);
@@ -3720,7 +3718,7 @@ class Renderer {
     }
     renderNode(node, context) {
         // Get interpolated world transform
-        const worldTransform = this.getInterpolatedWorldTransform(node, context.interpolation);
+        const worldTransform = this.getInterpolatedWorldTransform(node);
         // Skip if completely transparent
         if (worldTransform.alpha <= 0) {
             return;
@@ -3746,7 +3744,7 @@ class Renderer {
         // Restore context state
         context.ctx.restore();
     }
-    getInterpolatedWorldTransform(node, interpolation) {
+    getInterpolatedWorldTransform(node) {
         // For now, return current world transform
         // In a full implementation, this would interpolate between previous and current transforms
         return node.getWorldTransform();
@@ -3981,17 +3979,6 @@ class Renderer {
         if (cores && cores < 4)
             return true; // Less than 4 CPU cores
         return false;
-    }
-    setupCameraTransform(interpolation, ctx) {
-        ctx.save();
-        // Apply viewport scaling and centering
-        ctx.translate(this.viewport.offset.x, this.viewport.offset.y);
-        ctx.scale(this.viewport.scale, this.viewport.scale);
-        // Apply camera transform
-        ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-        ctx.scale(this.camera.zoom, this.camera.zoom);
-        ctx.rotate(this.camera.rotation);
-        ctx.translate(-this.camera.position.x, -this.camera.position.y);
     }
     cullNodes(nodes) {
         if (!this.enableFrustumCulling) {

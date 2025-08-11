@@ -52,7 +52,6 @@ export class Renderer {
     batchedSprites: 0
   };
   private spriteBatch: any[] = [];
-  private maxBatchSize = 100;
   private enableFrustumCulling = true;
   private enableSpriteBatching = true;
 
@@ -239,7 +238,7 @@ export class Renderer {
     return { x: screenX, y: screenY };
   }
 
-  private setupCameraTransform(interpolation: number): void {
+  private setupCameraTransform(): void {
     this.ctx.save();
     
     // Apply viewport scaling and centering
@@ -255,7 +254,7 @@ export class Renderer {
 
   private renderNode(node: Node, context: RenderContext): void {
     // Get interpolated world transform
-    const worldTransform = this.getInterpolatedWorldTransform(node, context.interpolation);
+    const worldTransform = this.getInterpolatedWorldTransform(node);
     
     // Skip if completely transparent
     if (worldTransform.alpha <= 0) {
@@ -287,7 +286,7 @@ export class Renderer {
     context.ctx.restore();
   }
 
-  private getInterpolatedWorldTransform(node: Node, interpolation: number): Transform2D {
+  private getInterpolatedWorldTransform(node: Node): Transform2D {
     // For now, return current world transform
     // In a full implementation, this would interpolate between previous and current transforms
     return node.getWorldTransform();
@@ -565,19 +564,6 @@ export class Renderer {
     return false;
   }
 
-  private setupCameraTransform(interpolation: number, ctx: CanvasRenderingContext2D): void {
-    ctx.save();
-    
-    // Apply viewport scaling and centering
-    ctx.translate(this.viewport.offset.x, this.viewport.offset.y);
-    ctx.scale(this.viewport.scale, this.viewport.scale);
-    
-    // Apply camera transform
-    ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-    ctx.scale(this.camera.zoom, this.camera.zoom);
-    ctx.rotate(this.camera.rotation);
-    ctx.translate(-this.camera.position.x, -this.camera.position.y);
-  }
 
   private cullNodes(nodes: Node[]): Node[] {
     if (!this.enableFrustumCulling) {

@@ -2,8 +2,8 @@
  * Action and Trigger execution system
  */
 
-import { Action, ActionType, Condition, Trigger, TriggerEvent } from '../types/actions.js';
-import { Node, LGFCartridge, Vector2, AudioManager } from '../types/core.js';
+import { Action, Condition } from '../types/actions.js';
+import { Node, LGFCartridge, AudioManager } from '../types/core.js';
 import { GameLoop } from './game-loop.js';
 
 export interface ActionContext {
@@ -256,7 +256,7 @@ export class ActionSystem {
     this.timers.set(timerId, timer);
   }
 
-  private executeStopTimer(action: Action, context: ActionContext): void {
+  private executeStopTimer(action: Action, _context: ActionContext): void {
     const timerId = action.params.id;
     if (typeof timerId === 'string') {
       this.timers.delete(timerId);
@@ -282,12 +282,12 @@ export class ActionSystem {
     }
   }
 
-  private executeStopMusic(action: Action, context: ActionContext): void {
+  private executeStopMusic(_action: Action, context: ActionContext): void {
     context.audioManager.stopMusic();
   }
 
   // Helper methods
-  private createNodeFromData(nodeData: any): Node | null {
+  private createNodeFromData(_nodeData: any): Node | null {
     // This would create a proper Node instance from JSON data
     // For now, return null as this requires the full Node implementation
     return null;

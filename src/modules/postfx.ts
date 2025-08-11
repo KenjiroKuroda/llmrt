@@ -3,7 +3,7 @@
  * Implements vignette, bloom-lite, and color grading effects
  */
 
-import { Node, Vector2, Transform2D } from '../types/core.js';
+import { Node } from '../types/core.js';
 import { RenderModule, RenderContext, ModuleDefinition } from '../types/modules.js';
 import { ModuleRegistry } from '../core/module-registry.js';
 

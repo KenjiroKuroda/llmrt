@@ -33,7 +33,6 @@ export declare class Renderer {
     private qualitySettings;
     private renderStats;
     private spriteBatch;
-    private maxBatchSize;
     private enableFrustumCulling;
     private enableSpriteBatching;
     constructor(canvas: HTMLCanvasElement, theme: ThemeTokens);
@@ -65,6 +64,7 @@ export declare class Renderer {
      * Convert world coordinates to screen coordinates
      */
     worldToScreen(worldPos: Vector2): Vector2;
+    private setupCameraTransform;
     private renderNode;
     private getInterpolatedWorldTransform;
     private applyTransform;

@@ -39,7 +39,7 @@ export declare class InputManagerImpl implements InputManager {
     isActionJustPressed(action: string): boolean;
     isActionJustReleased(action: string): boolean;
     getPointerPosition(): Vector2;
-    getPointerWorldPosition(camera?: any): Vector2;
+    getPointerWorldPosition(_camera?: any): Vector2;
     update(): void;
     private handleKeyDown;
     private handleKeyUp;

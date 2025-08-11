@@ -173,7 +173,7 @@ class InputManagerImpl {
     getPointerPosition() {
         return { ...this.pointerState.position };
     }
-    getPointerWorldPosition(camera) {
+    getPointerWorldPosition(_camera) {
         // For now, return screen position. Camera transformation would be added later
         return { ...this.pointerState.position };
     }
@@ -3236,9 +3236,9 @@ class AssetPreviewManager {
  * Generates optimized builds for different deployment targets
  */
 class BuildExporter {
+    // TODO: Implement module code storage for advanced builds
     constructor() {
         this.engineCode = '';
-        this.moduleCode = new Map();
         this.loadEngineCode();
     }
     async loadEngineCode() {

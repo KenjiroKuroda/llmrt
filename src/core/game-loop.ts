@@ -74,7 +74,6 @@ export class GameLoop {
   private _lastFpsUpdate: number = 0;
   private _currentFps: number = 0;
   private _droppedFrames: number = 0;
-  private _startTime: number = 0;
   
   // RNG system
   private _rng: DeterministicRNG = new DeterministicRNG();

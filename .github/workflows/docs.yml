@@ -33,7 +33,9 @@ jobs:
         run: npm ci
 
       - name: Build documentation
-        run: npm run build:docs
+        run: |
+          export NODE_OPTIONS="--max-old-space-size=4096"
+          npx docusaurus build --no-minify
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

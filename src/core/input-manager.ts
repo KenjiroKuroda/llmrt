@@ -146,7 +146,7 @@ export class InputManagerImpl implements InputManager {
     return { ...this.pointerState.position };
   }
 
-  getPointerWorldPosition(camera?: any): Vector2 {
+  getPointerWorldPosition(_camera?: any): Vector2 {
     // For now, return screen position. Camera transformation would be added later
     return { ...this.pointerState.position };
   }

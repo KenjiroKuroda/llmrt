@@ -28,10 +28,11 @@ export interface ModuleDependency {
 }
 
 export class BuildOptimizer {
-  private static readonly CORE_MODULES = [
-    'engine', 'scene-tree', 'game-loop', 'renderer', 
-    'input-manager', 'audio-manager', 'action-system'
-  ];
+  // Core modules that are always included
+  // private static readonly CORE_MODULES = [
+  //   'engine', 'scene-tree', 'game-loop', 'renderer', 
+  //   'input-manager', 'audio-manager', 'action-system'
+  // ];
 
   private static readonly OPTIONAL_MODULES: ModuleDependency[] = [
     {
@@ -203,7 +204,7 @@ export class BuildOptimizer {
     if (optimizations.treeshake) {
       plugins.push({
         name: 'tree-shake-unused-exports',
-        generateBundle(options: any, bundle: any) {
+        generateBundle() {
           // Custom tree-shaking logic would go here
           console.log('Tree-shaking unused exports...');
         }

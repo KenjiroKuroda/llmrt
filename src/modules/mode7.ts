@@ -3,7 +3,7 @@
  * Implements perspective transformation math for retro-style racing games
  */
 
-import { Node, Vector2, Transform2D } from '../types/core.js';
+import { Node, Vector2 } from '../types/core.js';
 import { RenderModule, RenderContext, ModuleDefinition, Mode7PlaneNode } from '../types/modules.js';
 import { ModuleRegistry } from '../core/module-registry.js';
 

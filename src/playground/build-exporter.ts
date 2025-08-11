@@ -39,7 +39,7 @@ export interface BuildResult {
 
 export class BuildExporter {
   private engineCode: string = '';
-  private moduleCode: Map<string, string> = new Map();
+  // TODO: Implement module code storage for advanced builds
 
   constructor() {
     this.loadEngineCode();

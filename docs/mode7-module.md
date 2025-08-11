@@ -233,7 +233,7 @@ The Mode-7 module works in all modern browsers that support:
 
 ## See Also
 
-- [Core Renderer Documentation](./renderer.md)
-- [Module System Guide](./modules.md)
-- [Action System Reference](./actions.md)
+- [API Documentation](./api-documentation.md)
+- [Node Reference](./node-reference.md)
+- [Action Triggers Reference](./actions-triggers-reference.md)
 - [Sample Games](../examples/)

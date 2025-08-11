@@ -24,7 +24,6 @@ export interface ModuleDependency {
     platforms: string[];
 }
 export declare class BuildOptimizer {
-    private static readonly CORE_MODULES;
     private static readonly OPTIONAL_MODULES;
     private static readonly BUILD_TARGETS;
     /**

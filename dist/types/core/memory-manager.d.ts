@@ -53,7 +53,7 @@ export declare class MemoryManager {
     /**
      * Track weak reference for automatic cleanup
      */
-    trackWeakRef<T extends object>(obj: T): WeakRef<T>;
+    trackWeakRef<T extends object>(obj: T): any;
     /**
      * Register cleanup callback
      */

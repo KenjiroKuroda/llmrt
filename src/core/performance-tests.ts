@@ -2,7 +2,7 @@
  * Performance tests to validate optimization requirements
  */
 
-import { PerformanceMonitor, PerformanceBudget } from './performance-monitor.js';
+import { PerformanceMonitor } from './performance-monitor.js';
 import { MemoryManager } from './memory-manager.js';
 import { BuildOptimizer } from './build-optimizer.js';
 

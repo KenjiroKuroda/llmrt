@@ -196,7 +196,7 @@ export class TriggerSystem {
   /**
    * Extract the key from a key trigger (if specified)
    */
-  private getTriggerKey(trigger: Trigger): string | null {
+  private getTriggerKey(): string | null {
     // Look for key specification in trigger actions or params
     // This is a simplified implementation
     return null;

@@ -6,7 +6,7 @@ import { LLMRTEngine, EngineState, LGFCartridge, InputManager, AudioManager } fr
 import { ModuleRegistry } from './module-registry.js';
 import { InputManagerImpl } from './input-manager.js';
 import { AudioManager as AudioManagerImpl } from './audio-manager.js';
-import { CartridgeLoader, CartridgeLoadOptions, CartridgeLoadProgress } from './cartridge-loader.js';
+import { CartridgeLoader, CartridgeLoadOptions } from './cartridge-loader.js';
 import { AssetManager } from './asset-manager.js';
 import { AccessibilityManager, AccessibilityOptions } from './accessibility-manager.js';
 

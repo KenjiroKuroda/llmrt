@@ -3,7 +3,7 @@
  * Handles keyboard navigation, screen reader support, and accessibility features
  */
 
-import { Node, ThemeTokens, Vector2 } from '../types/core.js';
+import { Node, ThemeTokens } from '../types/core.js';
 import { InputManager } from './input-manager.js';
 
 export interface AccessibilityOptions {
@@ -202,6 +202,9 @@ export class AccessibilityManager {
   private setupAccessibilityFeatures(): void {
     // Detect if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      // TODO: Implement reduced motion features
+    }
     
     // Detect if user prefers high contrast
     const prefersHighContrast = window.matchMedia('(prefers-contrast: high)').matches;

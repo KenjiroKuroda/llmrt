@@ -89,7 +89,7 @@ export class MemoryManager {
   private gcTotalTime = 0;
   private gcThreshold = 50 * 1024 * 1024; // 50MB threshold
   private isGCScheduled = false;
-  private weakRefs = new Set<WeakRef<any>>();
+  private weakRefs = new Set<any>(); // WeakRef compatibility
   private cleanupCallbacks = new Map<string, () => void>();
 
   constructor() {
@@ -234,10 +234,15 @@ export class MemoryManager {
   /**
    * Track weak reference for automatic cleanup
    */
-  trackWeakRef<T extends object>(obj: T): WeakRef<T> {
-    const weakRef = new WeakRef(obj);
-    this.weakRefs.add(weakRef);
-    return weakRef;
+  trackWeakRef<T extends object>(obj: T): any {
+    // WeakRef compatibility - simplified implementation
+    if (typeof WeakRef !== 'undefined') {
+      const weakRef = new WeakRef(obj);
+      this.weakRefs.add(weakRef);
+      return weakRef;
+    }
+    // Fallback for environments without WeakRef
+    return { deref: () => obj };
   }
 
   /**
@@ -299,7 +304,7 @@ export class MemoryManager {
    */
   private performMaintenance(): void {
     // Clean up dead weak references
-    const deadRefs: WeakRef<any>[] = [];
+    const deadRefs: any[] = [];
     for (const weakRef of this.weakRefs) {
       if (weakRef.deref() === undefined) {
         deadRefs.push(weakRef);

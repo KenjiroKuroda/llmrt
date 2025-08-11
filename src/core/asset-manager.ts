@@ -3,7 +3,7 @@
  * Handles loading, caching, and management of sprites, audio, and fonts
  */
 
-import { SpriteAsset, AudioAsset, FontAsset, AssetManifest } from '../types/core.js';
+import { SpriteAsset, FontAsset, AssetManifest } from '../types/core.js';
 
 export interface LoadedSpriteAsset {
   id: string;
@@ -269,7 +269,7 @@ export class AssetManager {
   private async loadSpriteImage(asset: SpriteAsset, timeout: number): Promise<LoadedSpriteAsset> {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      let timeoutId: number | null = null;
+      let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
       const cleanup = () => {
         if (timeoutId) {
@@ -319,7 +319,7 @@ export class AssetManager {
 
     return new Promise((resolve, reject) => {
       const fontFace = new FontFace(asset.family, `url(${asset.url})`);
-      let timeoutId: number | null = null;
+      let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
       const cleanup = () => {
         if (timeoutId) {

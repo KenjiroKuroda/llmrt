@@ -813,7 +813,7 @@ class LGFValidatorCLI {
         }
     }
     buildLineNumberMap(content) {
-        content.split('\n');
+        // Lines counting could be implemented here if needed
         const lineMap = new Map();
         // Build a map of JSON paths to line numbers
         // This is a simplified implementation - a full implementation would need

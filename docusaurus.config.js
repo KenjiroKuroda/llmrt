@@ -5,7 +5,7 @@ module.exports = {
   tagline: 'A tiny, dependency-free web runtime for JSON-based game cartridges',
   favicon: 'img/favicon.ico',
 
-  url: 'https://shoshin.tech',
+  url: 'https://username.github.io',
   baseUrl: '/llmrt/',
   organizationName: 'your-github-username',
   projectName: 'llmrt',

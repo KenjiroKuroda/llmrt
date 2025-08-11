@@ -131,3 +131,5 @@ Thumbs.db
 # Claude and AI assistant directories
 .claude/
 .kiro/
+
+.DS_Store

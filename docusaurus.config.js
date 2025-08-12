@@ -6,7 +6,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
 
   url: 'https://kenjirokuroda.github.io',
-  baseUrl: '/llmrt/',
+  baseUrl: '/',
   organizationName: 'KenjiroKuroda',
   projectName: 'llmrt',
 

@@ -236,4 +236,3 @@ The Mode-7 module works in all modern browsers that support:
 - [API Documentation](./api-documentation.md)
 - [Node Reference](./node-reference.md)
 - [Action Triggers Reference](./actions-triggers-reference.md)
-- [Sample Games](../examples/)

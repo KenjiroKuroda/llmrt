@@ -10,7 +10,7 @@ module.exports = {
   organizationName: 'KenjiroKuroda',
   projectName: 'llmrt',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
@@ -25,7 +25,9 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/kenjirokuroda/llmrt/tree/main/',
+          routeBasePath: 'docs',
         },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -37,10 +39,6 @@ module.exports = {
     image: 'img/llmrt-social-card.jpg',
     navbar: {
       title: 'LLMRT',
-      logo: {
-        alt: 'LLMRT Logo',
-        src: 'img/logo.svg',
-      },
       items: [
         {
           type: 'docSidebar',

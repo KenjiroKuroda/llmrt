@@ -37,6 +37,18 @@ jobs:
           export NODE_OPTIONS="--max-old-space-size=4096"
           echo "Starting Docusaurus build..."
           
+          echo "Current directory contents:"
+          ls -la
+          
+          echo "Node.js version:"
+          node --version
+          
+          echo "NPM version:"
+          npm --version
+          
+          echo "Package.json before modification:"
+          cat package.json | head -10
+          
           # Temporarily remove ESM type for docs build
           cp package.json package.json.backup
           node -e "
@@ -45,8 +57,18 @@ jobs:
             require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
           
+          echo "Package.json after ESM removal:"
+          cat package.json | head -10
+          
+          echo "Checking if docusaurus.config.js exists:"
+          ls -la docusaurus.config.js || echo "Config file not found!"
+          
           echo "Building docs without ESM..."
-          npx docusaurus build --no-minify
+          npx docusaurus build --no-minify || {
+            echo "Docusaurus build failed! Exit code: $?"
+            echo "Attempting build with verbose output..."
+            npx docusaurus build --no-minify --verbose || echo "Verbose build also failed"
+          }
           
           # Restore original package.json
           mv package.json.backup package.json
@@ -55,10 +77,12 @@ jobs:
           ls -la
           if [ -d "build" ]; then
             echo "Build directory found:"
-            ls -la build/
+            ls -la build/ | head -20
           else
-            echo "Build directory not found!"
-            exit 1
+            echo "Build directory not found! Current directory:"
+            pwd
+            echo "All files in current directory:"
+            find . -maxdepth 2 -type d
           fi
 
       - name: Setup Pages

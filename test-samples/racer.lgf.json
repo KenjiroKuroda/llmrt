@@ -490,17 +490,17 @@
     "audio": [
       {
         "id": "engine",
-        "url": "engine.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "sfx"
       },
       {
         "id": "tire",
-        "url": "tire.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "sfx"
       },
       {
         "id": "raceMusic",
-        "url": "race-music.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "music"
       }
     ],

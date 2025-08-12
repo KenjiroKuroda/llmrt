@@ -454,12 +454,12 @@
     "audio": [
       {
         "id": "bounce",
-        "url": "bounce.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "sfx"
       },
       {
         "id": "score",
-        "url": "score.wav", 
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "sfx"
       }
     ],

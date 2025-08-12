@@ -12,7 +12,7 @@
     "build:desktop": "rollup -c --environment BUILD_TARGET:desktop-full",
     "build:web": "rollup -c --environment BUILD_TARGET:web-standard",
     "build:all": "npm run build:mobile && npm run build:desktop && npm run build:web",
-    "build:playground": "rollup -c && cp playground.html dist/",
+    "build:playground": "rollup -c && cp playground.html dist/ && cp -r test-samples dist/",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:performance": "vitest --run src/core/performance-tests.ts",

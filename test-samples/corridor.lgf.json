@@ -409,17 +409,17 @@
     "audio": [
       {
         "id": "footstep",
-        "url": "footstep.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "sfx"
       },
       {
         "id": "torch",
-        "url": "torch.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "sfx"
       },
       {
         "id": "ambient",
-        "url": "ambient.wav",
+        "url": "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAAAAAA==",
         "type": "music"
       }
     ],

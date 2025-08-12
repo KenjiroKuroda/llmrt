@@ -47,6 +47,11 @@ module.exports = {
           label: 'Docs',
         },
         {
+          to: '/playground/',
+          label: '🎮 Playground',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/kenjirokuroda/llmrt',
           label: 'GitHub',
           position: 'right',
@@ -66,6 +71,10 @@ module.exports = {
             {
               label: 'API Documentation',
               to: '/docs/api-documentation',
+            },
+            {
+              label: '🎮 Playground',
+              to: '/playground/',
             },
           ],
         },

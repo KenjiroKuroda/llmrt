@@ -1,8 +1,25 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
-# LLM Canvas Engine Playground
+# Interactive Playground
+
+Experience the LLM Canvas Engine in action with our interactive playground. Try out examples, experiment with game cartridges, and see the engine's capabilities in real-time.
+
+## Launch Playground
+
+<div style={{textAlign: 'center', margin: '2rem 0'}}>
+  <a 
+    href="/llmrt/playground/" 
+    target="_blank"
+    className="button button--primary button--lg"
+    style={{textDecoration: 'none'}}
+  >
+    🎮 Open Interactive Playground →
+  </a>
+</div>
+
+The playground opens in a new tab/window and includes:
 
 The playground is an interactive development environment for testing and debugging LGF cartridges. It provides real-time editing, validation, performance monitoring, and build export capabilities.
 

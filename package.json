@@ -24,7 +24,7 @@
     "analyze-bundle": "npm run build && ls -la dist/ && gzip -c dist/llmrt.min.js | wc -c",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build:docs": "echo 'Docs build skipped locally due to ESM/Node v22 compatibility. Will build in CI.' || docusaurus build --no-minify",
+    "build:docs": "echo 'Docs build skipped locally due to ESM/Node v22 compatibility. Use GitHub Actions to deploy docs.' || docusaurus build --no-minify",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

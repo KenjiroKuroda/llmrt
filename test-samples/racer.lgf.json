@@ -474,14 +474,14 @@
     "sprites": [
       {
         "id": "roadTexture",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjgnIGhlaWdodD0nMTI4Jz48cmVjdCB3aWR0aD0nMTI4JyBoZWlnaHQ9JzEyOCcgZmlsbD0nIzMzMzMzMycvPgogICAgPHJlY3QgeD0nMCcgeT0nNjInIHdpZHRoPScxMjgnIGhlaWdodD0nNCcgZmlsbD0nI0ZGRkYwMCcvPgogICAgPHJlY3QgeD0nMCcgeT0nMzInIHdpZHRoPScxNicgaGVpZ2h0PScyJyBmaWxsPScjRkZGRkZGJy8+CiAgICA8cmVjdCB4PSczMicgeT0nMzInIHdpZHRoPScxNicgaGVpZ2h0PScyJyBmaWxsPScjRkZGRkZGJy8+CiAgICA8cmVjdCB4PSc2NCcgeT0nMzInIHdpZHRoPScxNicgaGVpZ2h0PScyJyBmaWxsPScjRkZGRkZGJy8+CiAgICA8cmVjdCB4PSc5NicgeT0nMzInIHdpZHRoPScxNicgaGVpZ2h0PScyJyBmaWxsPScjRkZGRkZGJy8+PC9zdmc+",
         "width": 128,
         "height": 128,
         "frames": 1
       },
       {
         "id": "carSprite",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyBmaWxsPSd0cmFuc3BhcmVudCcvPgogICAgPHJlY3QgeD0nNCcgeT0nOCcgd2lkdGg9JzI0JyBoZWlnaHQ9JzE2JyBmaWxsPScjRkYwMDAwJyByeD0nNCcvPgogICAgPHJlY3QgeD0nNicgeT0nNicgd2lkdGg9JzIwJyBoZWlnaHQ9JzYnIGZpbGw9JyM4N0NFRUInIHJ4PScyJy8+CiAgICA8Y2lyY2xlIGN4PSc4JyBjeT0nMjgnIHI9JzMnIGZpbGw9JyMwMDAwMDAnLz4KICAgIDxjaXJjbGUgY3g9JzI0JyBjeT0nMjgnIHI9JzMnIGZpbGw9JyMwMDAwMDAnLz48L3N2Zz4=",
         "width": 32,
         "height": 32,
         "frames": 1

@@ -379,28 +379,28 @@
     "sprites": [
       {
         "id": "wallTexture",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCc+PHJlY3Qgd2lkdGg9JzY0JyBoZWlnaHQ9JzY0JyBmaWxsPScjOEI0NTEzJy8+CiAgICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nMzInIGhlaWdodD0nMTYnIGZpbGw9JyNBMDUyMkQnIHN0cm9rZT0nIzY1NDMyMScgc3Ryb2tlLXdpZHRoPScxJy8+CiAgICA8cmVjdCB4PScxNicgeT0nMTYnIHdpZHRoPSczMicgaGVpZ2h0PScxNicgZmlsbD0nI0EwNTIyRCcgc3Ryb2tlPScjNjU0MzIxJyBzdHJva2Utd2lkdGg9JzEnLz4KICAgIDxyZWN0IHg9JzAnIHk9JzMyJyB3aWR0aD0nMzInIGhlaWdodD0nMTYnIGZpbGw9JyNBMDUyMkQnIHN0cm9rZT0nIzY1NDMyMScgc3Ryb2tlLXdpZHRoPScxJy8+CiAgICA8cmVjdCB4PScxNicgeT0nNDgnIHdpZHRoPSczMicgaGVpZ2h0PScxNicgZmlsbD0nI0EwNTIyRCcgc3Ryb2tlPScjNjU0MzIxJyBzdHJva2Utd2lkdGg9JzEnLz48L3N2Zz4=",
         "width": 64,
         "height": 64,
         "frames": 1
       },
       {
         "id": "doorTexture",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCc+PHJlY3Qgd2lkdGg9JzY0JyBoZWlnaHQ9JzY0JyBmaWxsPScjOEI0NTEzJy8+CiAgICA8cmVjdCB4PSc0JyB5PSc0JyB3aWR0aD0nNTYnIGhlaWdodD0nNTYnIGZpbGw9JyNDRDg1M0YnIHN0cm9rZT0nIzY1NDMyMScgc3Ryb2tlLXdpZHRoPScyJy8+CiAgICA8Y2lyY2xlIGN4PSc1MicgY3k9JzMyJyByPSczJyBmaWxsPScjRkZENzAwJy8+PC9zdmc+",
         "width": 64,
         "height": 64,
         "frames": 1
       },
       {
         "id": "torch",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyBmaWxsPSd0cmFuc3BhcmVudCcvPgogICAgPHJlY3QgeD0nMTQnIHk9JzE2JyB3aWR0aD0nNCcgaGVpZ2h0PScxNicgZmlsbD0nIzhCNDUxMycvPgogICAgPGVsbGlwc2UgY3g9JzE2JyBjeT0nOCcgcng9JzgnIHJ5PSc2JyBmaWxsPScjRkY0NTAwJy8+CiAgICA8ZWxsaXBzZSBjeD0nMTYnIGN5PSc4JyByeD0nNScgcnk9JzQnIGZpbGw9JyNGRkQ3MDAnLz48L3N2Zz4=",
         "width": 32,
         "height": 32,
         "frames": 4
       },
       {
         "id": "crosshair",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMCcgaGVpZ2h0PScyMCc+PHJlY3Qgd2lkdGg9JzIwJyBoZWlnaHQ9JzIwJyBmaWxsPSd0cmFuc3BhcmVudCcvPgogICAgPGxpbmUgeDE9JzAnIHkxPScxMCcgeDI9JzIwJyB5Mj0nMTAnIHN0cm9rZT0nd2hpdGUnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGxpbmUgeDE9JzEwJyB5MT0nMCcgeDI9JzEwJyB5Mj0nMjAnIHN0cm9rZT0nd2hpdGUnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
         "width": 20,
         "height": 20,
         "frames": 1

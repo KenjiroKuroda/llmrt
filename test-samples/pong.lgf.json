@@ -431,21 +431,21 @@
     "sprites": [
       {
         "id": "paddle",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAABkCAYAAACjwgS5AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMCcgaGVpZ2h0PScxMDAnPgogICAgPHJlY3Qgd2lkdGg9JzIwJyBoZWlnaHQ9JzEwMCcgZmlsbD0nd2hpdGUnLz4KICA8L3N2Zz4=",
         "width": 20,
         "height": 100,
         "frames": 1
       },
       {
         "id": "ball",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMCcgaGVpZ2h0PScyMCc+CiAgICA8cmVjdCB3aWR0aD0nMjAnIGhlaWdodD0nMjAnIGZpbGw9J3doaXRlJy8+CiAgPC9zdmc+",
         "width": 20,
         "height": 20,
         "frames": 1
       },
       {
         "id": "centerLine",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAJYCAYAAABKvKo1AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAEklEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAElFTkSuQmCC",
+        "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0JyBoZWlnaHQ9JzYwMCc+CiAgICA8cmVjdCB3aWR0aD0nNCcgaGVpZ2h0PSc2MDAnIGZpbGw9J3doaXRlJy8+CiAgPC9zdmc+",
         "width": 4,
         "height": 600,
         "frames": 1
